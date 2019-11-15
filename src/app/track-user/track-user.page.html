@@ -1,0 +1,74 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-button style='margin-left:6px' slot ="start" routerLink='/home' fill='clear' >
+        <ion-icon style="zoom:1.7; color: #fff"  name="arrow-back" ion-padding></ion-icon>
+    </ion-button>
+        
+  <ion-title  style="text-align: center"><img routerLink='/home' src="\assets\icon\magnifying-glass (10).png"></ion-title>   
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content color="primary">
+    <!-- back-->
+   <!-- <ion-button color="light" routerLink='/home' ><ion-icon style="zoom:1;"  name="arrow-back"></ion-icon></ion-button> -->
+   <!-- back -->
+    <ion-card style="background-color:white;">
+      <ion-card-content >
+          
+  
+  <div>
+    <div style="text-align: center; padding:20px">
+      <span style="zoom:1.2;font-weight: 900">Not feeling safe? </span><br>
+      <span style="zoom:1.2;font-weight: 400"> Share your Current location with your family </span>
+      <span style="zoom:1.2;font-weight: 400"> This will send out your location every 5 minute to your family</span>
+  
+    </div>
+  
+  <!-- email -->
+      <!--  -->
+    
+      <ion-item>
+          <ion-label color="primary" >Phone Number</ion-label>
+          <ion-input [(ngModel)]="cellNo"></ion-input> <ion-button (click)="search()"  slot="end" color="tertiary" fill="outline"><ion-icon  name="add"></ion-icon></ion-button>
+        </ion-item>
+     <!-- email -->
+     
+   <!-- start tracking -->
+     <ion-button (click)="start(cellNo)" *ngIf="!isTracking"  color="success"><ion-icon style="zoom:1;color:white" name="send"></ion-icon></ion-button>
+     <!-- start tracking -->
+  
+      <!-- end tracking -->
+     <ion-button (click)="stop()" *ngIf="isTracking" color="danger"><ion-icon style="zoom:1;"  name="hand"></ion-icon></ion-button>
+      <!-- end tracking -->
+  
+    </div>
+  
+  
+      </ion-card-content>
+      
+    </ion-card>
+   
+    
+    <!-- show lock-->
+    
+  
+  <div text-center >
+      <!-- <ion-icon  color="light" style="zoom:15;"  name="lock" *ngIf="lock"></ion-icon>
+      <ion-icon   color="light" style="zoom:15;"  name="unlock" *ngIf="!lock" ></ion-icon> -->
+      <div *ngIf="isTracking" class="loader" style="display: block;margin-left: auto;margin-right: auto">
+      </div>
+  </div>
+    <!-- show lock-->
+  
+  <!-- <ion-searchbar (keyup)="onKeyUp($event)"></ion-searchbar>
+    <ion-list>
+      <ion-item *ngFor="let contact of contactsFound">
+        <h2>{{contact?.displayName}}</h2>
+          <p *ngFor= "let num of contact?.phoneNumbers">
+            {{num.value}}
+          </p>
+      </ion-item>
+    </ion-list> -->
+  
+  </ion-content>
+  

@@ -1,14 +1,64 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
-</ion-content>
+    <ion-toolbar color="primary">
+        <ion-buttons slot ="start">
+            <ion-menu-button (click)="run()"></ion-menu-button>
+        </ion-buttons>
+        <ion-title  style="text-align: center"><img src="\assets\icon\magnifying-glass (10).png"></ion-title>   
+    </ion-toolbar>
+  </ion-header>
+      
+  <ion-content color="success">
+  <!--  start map -->
+     <div id="map_canvas"></div>
+  ​
+     <!-- <div id="panel"></div> -->
+        
+  <!-- end -->
+  <!-- <ion-list color="primary">
+        <ion-item *ngFor="let n of scheduled">
+            <ion-label text-wrap>
+              {{n.id}} - {{n.title}}
+              <p> Trigger: {{n.trigger | json }}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list> -->
+    <!-- slot="fixed"  -->
+  <ion-fab class="FabButtons"  vertical="bottom" horizontal="end" >
+    <ion-fab-button routerLink='/track-modal' color="tertiary">
+      <ion-icon name="share"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="showDestinationInput()" color="tertiary">
+      GO
+    </ion-fab-button>
+  </ion-fab>
+  ​
+      <ion-card class="searchBar" *ngIf=" !showMe && !showDirection ">
+        <ion-searchbar #searchInputText id="place-id" (ionBlur)='closeKeyboard();' [(ngModel)]="searchInput" (ionChange)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar>
+      <!-- <ion-searchbar #searchInput id="place-id" (ionBlur)='closeKeyboard();' [(ngModel)]="autocomplete.input" (ionChange)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar> -->
+      <ion-list   [hidden]="autocompleteItems.length == 0">
+        <ion-item class="list"  *ngFor="let item of autocompleteItems" tappable id="submit" (click)="selectSearchResult(item)">
+           {{ item.description }}
+        </ion-item>
+       </ion-list>
+      </ion-card>
+  ​
+  <p id="output"></p>
+  ​
+  <ion-card class="directions" *ngIf=" showMe && showDirection ">
+      <div>
+        <ion-input id='destination-input' [(ngModel)]='myDest' (ionChange)='SearchPlaces();' placeholder="choose destination.." value="" style='min-width: 200px;'></ion-input>
+        <ion-icon style="float: right; padding: 10px;" name="close" (click)="HideButton()"></ion-icon>
+      </div>
+      <div>
+        <ion-list   [hidden]="autocompleteItemz.length == 0">
+        <ion-item class="list"  *ngFor="let item of autocompleteItemz" tappable id="submit" (click)="getLocation(item)">
+           {{ item.description }}
+        </ion-item>
+       </ion-list>
+      </div>    
+    </ion-card>
+  </ion-content>
+  
+  
+  
+  
